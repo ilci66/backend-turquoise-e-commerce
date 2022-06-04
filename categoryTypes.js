@@ -1,0 +1,11 @@
+export const mouse = "mouse";
+export const keyboard = "keyboard";
+export const table = "table";
+export const desk = "desk";
+export const chair = "chair";
+export const phone = "phone";
+export const laptop = "laptop";
+export const desktop = "desktop";
+export const tablet = "tablet";
+export const gamingComputer = "gaming computer";
+export const smartWatch = "smart watch";
