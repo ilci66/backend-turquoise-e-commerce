@@ -1,53 +1,85 @@
 const graphql = require('graphql');
-// const Book = require('../models/book');
-// const Author = require('../models/Author');
 const Item = require('../models/item');
 const Category = require('../models/category');
 const User = require('../models/user');
+const Cart = require('../models/cart');
 const _ = require('lodash');
 
 
-// get the types I will be using 
 const {
     GraphQLObjectType,
     GraphQLString,
     GraphQLSchema,
+    GraphQLBoolean,
     GraphQLID,
     GraphQLInt,
     GraphQLList,
-    GraphQLNonNull
+    GraphQLNonNull,
+    GraphQLNull
 } = graphql;
 
-
-const BookType = new GraphQLObjectType({
-    name: 'Book',
-    fields: ( ) => ({
-        // authorId is defined in the root down below even though it's not here
-        // I can still create adn add the authorId value
+const ItemType = new GraphQLObjectType({
+    name: 'Item',
+    fields: () => ({
         id: { type: GraphQLID },
+        // name: String,
         name: { type: GraphQLString },
-        genre: { type: GraphQLString },
-        // we can define the relations between shcmemas
-        author: {
-            // type of data I'm expecting
-            type: AuthorType,
-            // resolve is the method that actually looks for and serves the data
-            // parent in this case is the book object
-            resolve(parent, args){  
-                // console.log(parent)
-                // return _.find(authors, { id: parent.authorId})
-                // {
-                //     book(id:2){
-                //       name
-                //       genre
-                //       author{
-                //         name
-                //       }
-                //     }
-                //   }
-                // this kind of a query is now possible
-                return Author.findById(parent.authorId);
+        // image: String,
+        image: { type: GraphQLString },
+        // price: Number,
+        price: { type: GraphQLInt },
+        // discount: Number | null,
+        discount: { type: GraphQLInt | GraphQLNull },
+        // quantity: Number,
+        quantity: { type: Number },
+        // inSale: Boolean,
+        inSale: { GraphQLBoolean },
+        // categoryId: String // category
+        category: {
+            type: CategoryType,
+            resolve(parent, args){
+                console.log(parent)
+                return Category.findById(parent.categoryId);
             }
         }
     })
 })
+
+const UserType = new GraphQLObjectType({
+    name: 'User',
+    fields: () => ({
+        // role: String,
+        role: GraphQLString,
+        // email: String,
+        email: GraphQLString,
+        // fullName: String,
+        fullName: GraphQLString,
+        // hashedPassword: String,
+        hashedPassword: GraphQLString,
+        // shippingAddress: {
+        shippingAddress: {
+        //     country: String,
+            country: GraphQLString,
+        //     city: String,
+            city: GraphQLString,
+        //     buildingNumber : Number,
+            buildingNumber: GraphQLInt,
+        //     street: String,
+            street: GraphQLString,
+        //     floor: Number | String,
+            floor: GraphQLString | GraphQLInt,
+        //     doorNumber: Number | String
+            doorNumber: GraphQLString | GraphQLInt
+        // },
+        },
+        // cartId: String | null 
+        cart: {
+            type: CartType,
+            resolve(parent, args){
+                console.log(parent)
+                return Category.findById(parent.cartId);
+            }
+        }
+    })
+})
+    

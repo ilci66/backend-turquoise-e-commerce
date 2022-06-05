@@ -2,14 +2,12 @@ const { Schema, model } = require('mongoose');
 
 const Item = Schema({
     name: String,
-    img: String,
-    categoryId: String,
-    // category: String,
+    image: String,
     price: Number,
     discount: Number | null,
-    inStock: Boolean,
-    quantityInStock: Number,
-    inSale: Boolean
+    quantity: Number,
+    inSale: Boolean,
+    categoryId: String // category
 })
 
 module.epxorts = model('Item', Item);

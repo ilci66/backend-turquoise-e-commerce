@@ -11,10 +11,9 @@ const User = Schema({
         buildingNumber : Number,
         street: String,
         floor: Number | String,
-        doorNumber: Number | String,
-        cart: [Object]
-    }
-
+        doorNumber: Number | String
+    },
+    cartId: String | null 
 })
 
 module.epxorts = model('User', User);
