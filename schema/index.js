@@ -242,19 +242,19 @@ const Mutation = new GraphQLObjectType({
         },
         cartId: { type: new GraphQLNonNull(GraphQLID) }
       },
-      resolve(parent, args) {
+      resolve(parent, args){
         let user = new User({
           role: args.role,
           email: args.email,
           fullName: args.fullName,
           hashedPassword: args.hashedPassword,
           shippingAddress: {
-              country: args.country,
-              city: args.city,
-              buildingNumber : args.buildingNumber,
-              street: args.street,
-              floor: args.floor,
-              doorNumber: args.doorNumber
+            country: args.country,
+            city: args.city,
+            buildingNumber : args.buildingNumber,
+            street: args.street,
+            floor: args.floor,
+            doorNumber: args.doorNumber
           },
           cartId: args.cartId
         })
@@ -262,10 +262,58 @@ const Mutation = new GraphQLObjectType({
         return user.save();
       }
     },
-    addItemToCart: {
+    getOrCreateCart: {
+      // create a cart if the user is not logged in and and there is no cart in the session
+
+      // if session has a cart and user has one too, after login combine them
+
+      // 
+
+
 
     },
+    addItemToCart: {
+      // type: ItemType,
+      // args: {
+      //   id: { type: GraphQLID },
+      // },
+      // resolve(parent, args){
+
+      //   let cart = Cart.findById(parent.id)
+      //   let item = Item.findById(args.id)
+
+      //   const result = cart.items.filter(x => x.itemID === item.id)
+
+      //   if(result > 0) {
+      //     const newArr = cart.items.map(x => {
+      //       if(x.itemID === item.id) {
+      //         return {...x, quantity : quantity += 1}
+      //       }
+      //       return x
+      //     })
+
+      //     Cart.findOneAndUpdate({id: parent.id}, newArr)
+      //   } else {
+      //     const newItems = [...cart.items, { itemID: item.id, quantity: 1, price: item.price }]
+
+      //   }
+        
+
+      //   // const newArr = arr.map(object => {
+      //   //   if (object.name === "a") {
+      //   //     return {...object, name: 'John'};
+      //   //   }
+      //   //   return object;
+      //   // });
+      // }
+    },
     removeItemFromCart: {
+
+    },
+    incrementQuantityOfItem: {
+
+    },
+    decremenetQuantityOfItem: {
 
     },
     resetCart : {
