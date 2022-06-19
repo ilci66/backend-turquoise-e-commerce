@@ -1,13 +1,18 @@
 const express = require('express');
-const mongoose = require('mongoose');
-
-const { graphqlHTTP } = require('express-graphql');
-const schema = require('./schema/index');
 require('dotenv').config();
+const routes = require('./routes')
+const protectedRoutes = require('./routes/protected')
+
+
+
 const cors = require('cors')
 
-
 const app = express();
+
+
+app.use('/', routes);
+app.use('/protected', protectedRoutes)
+
 app.use(cors())
 
 
